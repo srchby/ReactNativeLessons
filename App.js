@@ -1,11 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import Header from './components/Header';
+import ListTasks from './components/ListTasks';
+import {uuid} from 'uuidv4';
 
-export default function App() {
+const App = () => {
+  
+  const [tasks,setTasks] = useState ([
+    {
+      id: 1,
+      title: 'Task 1',
+      completed: false
+    },
+    {
+      id: 2,
+      title: 'Task 2',
+      completed: false
+    },
+    {
+      id: 3,
+      title: 'Task 3',
+      completed: true
+    },
+  ])
   return (
     <View style={styles.container}>
-      <Text style={styles.Text}>React Native Lessons</Text>
-      <StatusBar style="auto" />
+      <Header />
+      <FlatList 
+      data={tasks} 
+      renderItem={({item}) => <ListTasks item={item}/>}
+      />
     </View>
   );
 }
@@ -13,13 +37,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 'auto',
-    padding: 'auto',
   },
-  Text: {
-    fontFamily: 'Helvetica',
+  text: {
+    padding: 20,
   }
 });
+
+export default App
