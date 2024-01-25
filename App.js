@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Header from './components/Header';
 import ListTasks from './components/ListTasks';
-import {uuid} from 'uuidv4';
 
 const App = () => {
   
@@ -23,12 +22,24 @@ const App = () => {
       completed: true
     },
   ])
+
+  // const deleteTasks = (id) => {
+  //   setTasks(tasks.filter(task => task.id!== id))
+  // }
+
+  const deleteTasks = (id) => {
+    setTasks(prevItems => {
+      return prevItems.filter(item => item.id!== id)
+    })
+  }
   return (
     <View style={styles.container}>
       <Header />
       <FlatList 
       data={tasks} 
-      renderItem={({item}) => <ListTasks item={item}/>}
+      renderItem={({item}) => <ListTasks item={item}
+      deleteTasks={deleteTasks}
+      />}
       />
     </View>
   );

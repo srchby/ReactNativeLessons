@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const ListTasks = ({ item }) => {
+const ListTasks = ({ item, deleteTasks }) => {
 
     return (
         <TouchableOpacity
@@ -18,7 +18,14 @@ const ListTasks = ({ item }) => {
                 >
                     {item.title}
                 </Text>
-                <Icon name="close" size={20} color="black"> </Icon>
+                <Icon
+                    name="close"
+                    style={styles.listTasksIcon}
+                    size={25}
+                    color="black"
+                    onPress={() => deleteTasks(item.id)}
+                >
+                </Icon>
             </View>
         </TouchableOpacity>
     );
@@ -41,6 +48,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         margin: 10,
+    },
+    listTasksIcon: {
+        padding: 15,
     }
 })
 
